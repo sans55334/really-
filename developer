@@ -1,1 +1,1 @@
-print("bú đầu cặc")
+showMessage("bú đầu cặc")
