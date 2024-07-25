@@ -1,1 +1,47 @@
-print("Chào Developer Của Bên CE Dogdog")
+function keyHit(sender, key)
+if key ~= '\r' then return key end
+if editKey.Text ~= 'SkyDogdog' and editKey1 ~= 'SkyAreTheBest' then
+showMessage("Bạn Đã Sai Mật Khẩu Hoặc Tên Người Dùng, Mời Nhập Lại")
+editKey.Text = ""
+editKey1.Text = ""
+return
+else
+showMessage("Chào Mừng Developer CE SkyDogdog")
+lblkey.Visible = false
+editKey.Visible = false
+editKey1.Visible = false
+Pnl.Visible = true
+lbl2.Visible = true
+return
+end
+end
+
+MyForm = createForm(false)
+MyForm.Height = 100
+MyForm.Width = 300
+
+Pnl = createPanel(MyForm)
+Pnl.Height = 100
+Pnl.Width = 300
+
+lblkey = createLabel(Pnl)
+lblkey.Top = 10
+lblkey.Left = 10
+lblkey.Caption = 'Khu Vực Đăng Nhập :'
+
+
+editKey = createEdit(MyForm)
+--setProperty(editKey,'EchoMode','emPassword')
+editKey.Top = 30
+editKey.Left = 10
+editKey.Width = 100
+editKey.OnKeyPress = keyHit
+
+editKey1 = createEdit(MyForm)
+setProperty(editKey1,'EchoMode','emPassword')
+editKey1.Top = 60
+editKey1.Left = 10
+editKey1.Width = 100
+editKey1.OnKeyPress = keyHit
+
+MyForm.show()
