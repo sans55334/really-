@@ -1,1 +1,12 @@
-closeCE()
+PROCESS_NAME = 'MiniGameApp.exe'
+openProcess(PROCESS_NAME)
+
+function CETrainer_CECheckbox1Click(sender)
+payattetion = getAddressList().getMemoryRecordByDescription("❖Killaura Vụt Xa 25 Block❖")
+payattetion.Active = true
+end
+
+function CETrainer_CECheckbox2Click(sender)
+payattetion2 = getAddressList().getMemoryRecordByDescription("❖Killaura Vụt Xa 25 Block❖")
+payattetion2.Active = false
+end
