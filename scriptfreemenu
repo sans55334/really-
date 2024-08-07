@@ -1,0 +1,2 @@
+PROCESS_NAME = 'MiniGameApp.exe'
+openProcess(PROCESS_NAME)
