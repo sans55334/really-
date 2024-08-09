@@ -1,12 +1,1 @@
-PROCESS_NAME = 'MiniGameApp.exe'
-openProcess(PROCESS_NAME)
-
-function CETrainer_CECheckbox1Click(sender)
-fuckyoubitched = getAddressList().getMemoryRecordByDescription("❖Unlock Hàm Lấy All VP❖")
-fuckyoubitched.Active = true
-end
-
-function CETrainer_CECheckbox2Click(sender)
-fuckyoubitched = getAddressList().getMemoryRecordByDescription("❖Unlock Hàm Lấy All VP❖")
-fuckyoubitched.Active = false
-end
+closeCE()
