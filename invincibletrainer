@@ -1,0 +1,22 @@
+PROCESS_NAME = 'MiniGameApp.exe'
+openProcess(PROCESS_NAME)
+function CETrainer_CECheckbox1Click(sender)
+yougayintwodays = getAddressList().getMemoryRecordByDescription("❖Bug Bất Tử (Alt+U) [VIP]❖")
+yougayintwodays.Active = true
+end
+
+function CETrainer_CECheckbox2Click(sender)
+yougayinonedays = getAddressList().getMemoryRecordByDescription("❖Tắt Bug Bất Tử❖")
+yougayinonedays.Active = true
+yougayinthreedays = getAddressList().getMemoryRecordByDescription("❖Unlock Di Chuyển Khi Bug Bất Tử [VIP]❖")
+yougayinthreedays.Active = true
+end
+
+function CETrainer_CECheckbox3Click(sender)
+yougayintwodays = getAddressList().getMemoryRecordByDescription("❖Bug Bất Tử (Alt+U) [VIP]❖")
+yougayintwodays.Active = false
+yougayinonedays = getAddressList().getMemoryRecordByDescription("❖Tắt Bug Bất Tử❖")
+yougayinonedays.Active = false
+yougayinthreedays = getAddressList().getMemoryRecordByDescription("❖Unlock Di Chuyển Khi Bug Bất Tử [VIP]❖")
+yougayinthreedays.Active = false
+end
