@@ -1,0 +1,12 @@
+PROCESS_NAME = 'MiniGameApp.exe'
+openProcess(PROCESS_NAME)
+
+function CETrainer_CECheckbox1Click(sender)
+youarebitchdick = getAddressList().getMemoryRecordByDescription("❖Spam Gọi Chuẩn Bị [VIP]❖")
+youarebitchdick.Active = true
+end
+
+function CETrainer_CECheckbox2Click(sender)
+youarebitchdick = getAddressList().getMemoryRecordByDescription("❖Spam Gọi Chuẩn Bị [VIP]❖")
+youarebitchdick.Active = false
+end
