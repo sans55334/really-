@@ -13,7 +13,7 @@ end
 
 local function isHostnameVip(hostname)
     local vipHostnames = {
-        "SkyDogdog", "ASUS"
+        "SkyDogdog", "DESKTOP-SJJMP4M"
     }
     for _, vipHostname in ipairs(vipHostnames) do
         if hostname == vipHostname then
