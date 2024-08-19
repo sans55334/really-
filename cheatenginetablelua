@@ -35,8 +35,6 @@ end
 local hostname = getHostname()
 
 if hostname then
-    print("Retrieved hostname: " .. hostname)
-
     local isVip = isHostnameVip(hostname)
 
     if isVip then
@@ -62,7 +60,7 @@ end
     end
 
     -- List of VIP UIDs
-    local vipUIDs = {1009990000, 1207947573}
+    local vipUIDs = {1009990000, 1207947573, 1132610116, 1103957721, 1023918578}
     local isVipUID = false
 
     for i = 1, #vipUIDs do
