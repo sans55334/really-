@@ -22,7 +22,7 @@ end
 
 local function isHostnameVip(hostname)
     local vipHostnames = {
-        "SkyDogdog", "DESKTOP-SJJMP4M"
+        "SkyDogdog", "DESKTOP-SJJMP4M", "lord"
     }
     for _, vipHostname in ipairs(vipHostnames) do
         if hostname == vipHostname then
@@ -60,7 +60,7 @@ end
     end
 
     -- List of VIP UIDs
-    local vipUIDs = {1009990000, 1207947573, 1132610116, 1103957721, 1023918578, 1299722340, 1196662709, 1297096991, 1127095936}
+    local vipUIDs = {1009990000, 1207947573, 1132610116, 1103957721, 1023918578, 1299722340, 1196662709, 1297096991, 1127095936, 1280481961}
     local isVipUID = false
 
     for i = 1, #vipUIDs do
