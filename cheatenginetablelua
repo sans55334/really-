@@ -1,6 +1,8 @@
 -- Define the process name to check
 local PROCESS_NAME = 'MiniGameApp.exe'
 
+openProcess(PROCESS_NAME)
+
 -- Function to check if the process is running
 local function checkProcess()
     if not openProcess(PROCESS_NAME) then
