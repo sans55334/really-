@@ -29,7 +29,7 @@ if hostname then
     local isVip = isHostnameVip(hostname)
 
     if isVip then
-    showMessage("CHÀO MỪNG DEVELOPER ĐÃ QUAY LẠI")
+
     else
         messageDialog("LỖI : HOSTNAME KHÔNG ĐƯỢC PHÉP", mtError)
         closeCE()
