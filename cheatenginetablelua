@@ -71,7 +71,7 @@ end
     end
 
     if isVipUID then
-    showMessage("CHÀO MỪNG DEVELOPER ĐÃ QUAY LẠI")
+
     else
         closeCE()
     end
