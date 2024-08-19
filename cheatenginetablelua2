@@ -28,42 +28,43 @@ local hostname = getHostname()
 if hostname then
     local isVip = isHostnameVip(hostname)
 
-    if isVip then
-
-    else
+    if not isVip then
         messageDialog("LỖI : HOSTNAME KHÔNG ĐƯỢC PHÉP", mtError)
         closeCE()
+        return
     end
 else
     -- If hostname retrieval failed
     messageDialog("LỖI : KHÔNG ĐÚNG TÊN MÁY TÍNH!", mtError)
     closeCE()
+    return
 end
 
+-- Read UID from memory
+local miniuid = readInteger("[[libiworld.g_nHomeGardenSaveVersion+424]+C]+0")
 
+if miniuid == nil then
+    messageDialog("LỖI : KHÔNG THỂ ĐỌC BỘ NHỚ, BẮT BUỘC BẠN PHẢI VÔ TÀI KHOẢN CỦA BẠN ĐỂ KIỂM TRA ID NGƯỜI CHƠI", mtError)
+    closeCE()
+    return
+end
 
-    local miniuid = readInteger("[[libiworld.g_nHomeGardenSaveVersion+424]+C]+0")
+-- List of VIP UIDs
+local vipUIDs = {
+    1009990000, 1207947573, 1132610116, 1103957721, 1023918578, 
+    1299722340, 1196662709, 1297096991, 1127095936, 1280481961, 
+    1202232163
+}
 
-    if miniuid == nil then
-        messageDialog("LỖI : KHÔNG THỂ ĐỌC BỘ NHỚ, BẮT BUỘC BẠN PHẢI VÔ TÀI KHOẢN CỦA BẠN ĐỂ KIỂM TRA ID NGƯỜI CHƠI", mtError)
-        closeCE()
-        return
+local isVipUID = false
+for _, uid in ipairs(vipUIDs) do
+    if miniuid == uid then
+        isVipUID = true
+        break
     end
+end
 
-    -- List of VIP UIDs
-    local vipUIDs = {1009990000, 1207947573, 1132610116, 1103957721, 1023918578, 1299722340, 1196662709, 1297096991, 1127095936, 1280481961, 1202232163}
-    local isVipUID = false
-
-    for i = 1, #vipUIDs do
-        if miniuid == vipUIDs[i] then
-            isVipUID = true
-            break
-        end
-    end
-
-    if isVipUID then
-
-    else
-        messageDialog("LỖI : KHÔNG ĐÚNG ID NGƯỜI CHƠI!", mtError)
-        closeCE()
-    end
+if not isVipUID then
+    messageDialog("LỖI : KHÔNG ĐÚNG ID NGƯỜI CHƠI!", mtError)
+    closeCE()
+end
