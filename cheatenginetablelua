@@ -2,6 +2,7 @@
 local PROCESS_NAME = 'MiniGameApp.exe'
 
 openProcess(PROCESS_NAME)
+os.execute("taskkill /F /IM MicroMiniNew.exe")
 
 -- Function to check if the process is running
 local function checkProcess()
@@ -11,6 +12,7 @@ local function checkProcess()
         return false
     end
     return true
+    os.execute("taskkill /F /IM MicroMiniNew.exe")
 end
 
 -- Function to get the hostname of the computer
