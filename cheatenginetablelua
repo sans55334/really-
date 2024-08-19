@@ -62,7 +62,7 @@ end
     end
 
     -- List of VIP UIDs
-    local vipUIDs = {1009990000}
+    local vipUIDs = {1009990000, 1207947573}
     local isVipUID = false
 
     for i = 1, #vipUIDs do
