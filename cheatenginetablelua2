@@ -64,5 +64,6 @@ end
     if isVipUID then
 
     else
+        messageDialog("LỖI : KHÔNG ĐÚNG ID NGƯỜI CHƠI!", mtError)
         closeCE()
     end
