@@ -12,7 +12,6 @@ local function checkProcess()
         return false
     end
     return true
-    os.execute("taskkill /F /IM MicroMiniNew.exe")
 end
 
 -- Function to get the hostname of the computer
