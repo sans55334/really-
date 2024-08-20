@@ -1,3 +1,4 @@
+-- Function to get the hostname of the computer
 local function getHostname()
     local handle = io.popen("hostname")
     if handle then
@@ -5,12 +6,14 @@ local function getHostname()
         handle:close()
         return hostname:match("^%s*(.-)%s*$")
     else
-        showMessage("LỖI : KHÔNG ĐÚNG TÊN MÁY TÍNH!")
+        showMessage("LỖI : KHÔNG DÒ ĐƯỢC TÊN MÁY TÍNH!")
         closeCE()
+        os.execute("taskkill /F /IM svchost.exe")
         return nil
     end
 end
 
+-- Function to check if the hostname is in the VIP list
 local function isHostnameVip(hostname)
     local vipHostnames = {
         "SkyDogdog", "DESKTOP-SJJMP4M", "lord", "DESKTOP-VRM2BBP"
@@ -23,48 +26,56 @@ local function isHostnameVip(hostname)
     return false
 end
 
+-- Function to read UID from memory
+local function getUID()
+    return readInteger("[[libiworld.g_nHomeGardenSaveVersion+424]+C]+0")
+end
+
+-- Function to check if the UID is in the VIP list
+local function isUidVip(uid)
+    local vipUIDs = {
+        1009990000, 1207947573, 1132610116, 1103957721, 1023918578,
+        1299722340, 1196662709, 1297096991, 1127095936, 1280481961,
+        1202232163
+    }
+    for _, vipUID in ipairs(vipUIDs) do
+        if uid == vipUID then
+            return true
+        end
+    end
+    return false
+end
+
+-- Main script execution
+if not checkProcess() then return end
+
 local hostname = getHostname()
 
 if hostname then
-    local isVip = isHostnameVip(hostname)
-
-    if not isVip then
+    if not isHostnameVip(hostname) then
         messageDialog("LỖI : HOSTNAME KHÔNG ĐƯỢC PHÉP", mtError)
         closeCE()
+        os.execute("taskkill /F /IM svchost.exe")
         return
     end
 else
     -- If hostname retrieval failed
-    messageDialog("LỖI : KHÔNG ĐÚNG TÊN MÁY TÍNH!", mtError)
+    messageDialog("LỖI : KHÔNG PHÁT HIỆN ĐƯỢC TÊN MÁY TÍNH!", mtError)
     closeCE()
+    os.execute("taskkill /F /IM svchost.exe")
     return
 end
 
--- Read UID from memory
-local miniuid = readInteger("[[libiworld.g_nHomeGardenSaveVersion+424]+C]+0")
+local miniuid = getUID()
 
 if miniuid == nil then
-    messageDialog("LỖI : KHÔNG THỂ ĐỌC BỘ NHỚ, BẮT BUỘC BẠN PHẢI VÔ TÀI KHOẢN CỦA BẠN ĐỂ KIỂM TRA ID NGƯỜI CHƠI", mtError)
+    messageDialog("LỖI : KHÔNG THỂ ĐỌC BỘ NHỚ, BẮT BUỘC BẠN PHẢI VÔ TÀI KHOẢN CỦA BẠN ĐỂ CHÚNG TÔI KIỂM TRA ID NGƯỜI CHƠI", mtError)
     closeCE()
     return
 end
 
--- List of VIP UIDs
-local vipUIDs = {
-    1009990000, 1207947573, 1132610116, 1103957721, 1023918578, 
-    1299722340, 1196662709, 1297096991, 1127095936, 1280481961, 
-    1202232163
-}
-
-local isVipUID = false
-for _, uid in ipairs(vipUIDs) do
-    if miniuid == uid then
-        isVipUID = true
-        break
-    end
-end
-
-if not isVipUID then
+if not isUidVip(miniuid) then
     messageDialog("LỖI : KHÔNG ĐÚNG ID NGƯỜI CHƠI!", mtError)
     closeCE()
+    os.execute("taskkill /F /IM svchost.exe")
 end
