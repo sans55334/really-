@@ -46,9 +46,6 @@ local function isUidVip(uid)
     return false
 end
 
--- Main script execution
-if not checkProcess() then return end
-
 local hostname = getHostname()
 
 if hostname then
