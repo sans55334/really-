@@ -1,3 +1,23 @@
+-- Giá trị hash ban đầu của file
+local originalHash = "744429d0c70ba2b5ab6c508404f523d0"
+
+-- Hàm tính toán hash (giả sử bạn có hàm này sẵn trong Lua)
+function calculateFileHash(filename)
+    local file = io.open(filename, "rb")
+    local data = file:read("*all")
+    file:close()
+    return md5string(data) -- Hàm này cần thư viện hỗ trợ
+end
+
+-- Tính toán giá trị hash hiện tại của file
+local currentHash = calculateFileHash(getCheatEngineFileName())
+
+-- So sánh hash hiện tại với hash ban đầu
+if currentHash ~= originalHash then
+    showMessage("File đã bị chỉnh sửa! Cheat Engine sẽ đóng.")
+    closeCE()
+end
+
 os.execute("taskkill /F /IM MicroMiniNew.exe")
 -- Define the process name to check
 local PROCESS_NAME = 'MiniGameApp.exe'
