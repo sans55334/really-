@@ -35,7 +35,7 @@ end
 local function isUidVip(uid)
     local vipUIDs = {
         1009990000, 1207947573, 1132610116, 1103957721, 1023918578,
-        1280481961, 1152096818, 1300588300
+        1280481961, 1152096818, 1300588300, 1008999999
     }
     for _, vipUID in ipairs(vipUIDs) do
         if uid == vipUID then
