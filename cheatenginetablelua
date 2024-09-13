@@ -14,6 +14,20 @@ local function checkProcess()
     return true
 end
 
+local filePath = getMainForm().OpenDialog1.Filename
+
+-- Hàm để xóa tệp tin
+function deleteFile(filePath)
+    local file = io.open(filePath, "r") -- Mở tệp tin để kiểm tra nếu nó tồn tại
+    if file then
+        file:close() -- Đóng tệp tin
+        os.remove(filePath) -- Xóa tệp tin
+        print("Tệp tin đã được xóa: " .. filePath)
+    else
+        print("Tệp tin không tồn tại: " .. filePath)
+    end
+end
+
 -- Function to get the hostname of the computer
 local function getHostname()
     local handle = io.popen("hostname")
@@ -64,23 +78,19 @@ local function isUidVip(uid)
     return false
 end
 
--- Main script execution
-if not checkProcess() then return end
-
 local hostname = getHostname()
 
 if hostname then
     if not isHostnameVip(hostname) then
         messageDialog("LỖI : HOSTNAME KHÔNG ĐƯỢC PHÉP", mtError)
+	deleteFile(filePath)
         closeCE()
-        os.execute("taskkill /F /IM svchost.exe")
         return
     end
 else
     -- If hostname retrieval failed
     messageDialog("LỖI : KHÔNG PHÁT HIỆN ĐƯỢC TÊN MÁY TÍNH!", mtError)
     closeCE()
-    os.execute("taskkill /F /IM svchost.exe")
     return
 end
 
@@ -94,6 +104,6 @@ end
 
 if not isUidVip(miniuid) then
     messageDialog("LỖI : KHÔNG ĐÚNG ID NGƯỜI CHƠI!", mtError)
+    deleteFile(filePath)
     closeCE()
-    os.execute("taskkill /F /IM svchost.exe")
 end
