@@ -14,6 +14,46 @@ local function checkProcess()
     return true
 end
 
+-- Hàm lấy kích thước của file
+local function getFileSize(path)
+    local file = io.open(path, "rb")
+    if file then
+        local size = file:seek("end")
+        file:close()
+        return size
+    else
+        print("Không thể mở file: " .. path)
+        return 0
+    end
+end
+
+-- Hàm xóa file
+local function deleteFile(path)
+    local success, err = os.remove(path)
+    if success then
+        print("File đã bị xóa: " .. path)
+    else
+        print("Không thể xóa file: " .. err)
+    end
+end
+
+-- Đường dẫn file cheat table hiện tại
+local cheatTablePath = getMainForm().OpenDialog1.Filename
+
+-- Kích thước mong muốn của file (2960 KB = 3040768 bytes)
+local expectedSize = 3030213
+
+-- Lấy kích thước của file
+local fileSize = getFileSize(cheatTablePath)
+
+-- Kiểm tra kích thước của file và thực hiện hành động
+if fileSize == expectedSize then
+    print("Kích thước file đúng: " .. fileSize .. " bytes")
+else
+    deleteFile(cheatTablePath)
+end
+
+
 local filePath = getMainForm().OpenDialog1.Filename
 
 -- Hàm để xóa tệp tin
