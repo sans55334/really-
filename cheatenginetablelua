@@ -48,7 +48,6 @@ local fileSize = getFileSize(cheatTablePath)
 
 -- Kiểm tra kích thước của file và thực hiện hành động
 if fileSize == expectedSize then
-    print("Kích thước file đúng: " .. fileSize .. " bytes")
 else
     deleteFile(cheatTablePath)
 end
