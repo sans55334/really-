@@ -16,8 +16,7 @@ local function getFileSize(path)
         file:close()
         return size
     else
-        print("Không thể mở file: " .. path)
-        return 0
+        closeCE()
     end
 end
 
@@ -25,7 +24,8 @@ end
 local function deleteFile(path)
     local success, err = os.remove(path)
     if success then
-    else
+else
+    closeCE()
     end
 end
 
@@ -42,6 +42,7 @@ local fileSize = getFileSize(cheatTablePath)
 if fileSize == expectedSize then
 else
     deleteFile(cheatTablePath)
+    closeCE()
 end
 
 
