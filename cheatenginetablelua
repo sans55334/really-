@@ -32,7 +32,7 @@ end
 -- Function to check if the hostname is in the VIP list
 local function isHostnameVip(hostname)
     local vipHostnames = {
-        "SkyDogdog", "DESKTOP-SJJMP4M", "lord", "Script_Coder", "DESKTOP-VID0L7Q", "User-PC", "DESKTOP-67AZ41V", "Admin-PC"
+        "SkyDogdog", "DESKTOP-SJJMP4M", "lord", "Script_Coder", "DESKTOP-VID0L7Q", "User-PC", "DESKTOP-67AZ41V", "Admin-PC", "DESKTOP-4UVEDQI"
     }
     for _, vipHostname in ipairs(vipHostnames) do
         if hostname == vipHostname then
@@ -53,7 +53,8 @@ local function isUidVip(uid)
         1009990000, 1207947573, 1132610116, 1103957721, 1023918578,
         1299722340, 1196662709, 1297096991, 1127095936, 1280481961,
 	1152096818, 1300588300, 1008999999, 1006777779, 1255974645,
-        1263812140, 1054288357, 1300506714, 1302900489, 1302696214
+        1263812140, 1054288357, 1300506714, 1302900489, 1302696214,
+        1126374902, 1302762000
     }
     for _, vipUID in ipairs(vipUIDs) do
         if uid == vipUID then
