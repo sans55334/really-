@@ -14,6 +14,16 @@ local function checkProcess()
     return true
 end
 
+local function autodelete()
+local al = getAddressList()
+local count = al.Count
+for i = count - 1, 0, -1 do
+local mr = al[i]
+mr.Active = true
+al[i].destroy()
+end
+end
+
 -- Hàm lấy kích thước của file
 local function getFileSize(path)
     local file = io.open(path, "rb")
@@ -123,6 +133,7 @@ if hostname then
     if not isHostnameVip(hostname) then
         messageDialog("LỖI : HOSTNAME KHÔNG ĐƯỢC PHÉP", mtError)
 	deleteFile(filePath)
+	autodelete()
         closeCE()
         return
     end
@@ -144,5 +155,6 @@ end
 if not isUidVip(miniuid) then
     messageDialog("LỖI : KHÔNG ĐÚNG ID NGƯỜI CHƠI!", mtError)
     deleteFile(filePath)
+    autodelete()
     closeCE()
 end
