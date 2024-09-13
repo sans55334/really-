@@ -32,7 +32,6 @@ local function getFileSize(path)
         file:close()
         return size
     else
-        closeCE()
     end
 end
 
