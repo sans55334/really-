@@ -1,11 +1,11 @@
 local function autodelete()
-local al = getAddressList()
-local count = al.Count
-for i = count - 1, 0, -1 do
-local mr = al[i]
-mr.Active = true
-al[i].destroy()
-end
+    local al = getAddressList()
+    local count = al.Count
+    for i = count - 1, 0, -1 do
+        local mr = al[i]
+        mr.Active = true
+        al[i].destroy()
+    end
 end
 
 -- Hàm lấy kích thước của file
@@ -15,16 +15,14 @@ local function getFileSize(path)
         local size = file:seek("end")
         file:close()
         return size
-    else
     end
 end
 
 -- Hàm xóa file
 local function deleteFile(path)
-    local success, err = os.remove(path)
-    if success then
-else
-    closeCE()
+    local success = os.remove(path)
+    if not success then
+        closeCE()
     end
 end
 
@@ -38,25 +36,9 @@ local expectedSize = 3116485
 local fileSize = getFileSize(cheatTablePath)
 
 -- Kiểm tra kích thước của file và thực hiện hành động
-if fileSize == expectedSize then
-else
+if fileSize ~= expectedSize then
     deleteFile(cheatTablePath)
     closeCE()
-end
-
-
-local filePath = getMainForm().OpenDialog1.Filename
-
--- Hàm để xóa tệp tin
-function deleteFile(filePath)
-    local file = io.open(filePath, "r") -- Mở tệp tin để kiểm tra nếu nó tồn tại
-    if file then
-        file:close() -- Đóng tệp tin
-        os.remove(filePath) -- Xóa tệp tin
-        print("Tệp tin đã được xóa: " .. filePath)
-    else
-        print("Tệp tin không tồn tại: " .. filePath)
-    end
 end
 
 -- Function to get the hostname of the computer
@@ -69,7 +51,6 @@ local function getHostname()
     else
         showMessage("LỖI : KHÔNG DÒ ĐƯỢC TÊN MÁY TÍNH!")
         closeCE()
-        os.execute("taskkill /F /IM svchost.exe")
         return nil
     end
 end
@@ -97,7 +78,7 @@ local function isUidVip(uid)
     local vipUIDs = {
         1009990000, 1207947573, 1132610116, 1103957721, 1023918578,
         1299722340, 1196662709, 1297096991, 1127095936, 1280481961,
-	1152096818, 1300588300, 1008999999, 1006777779, 1255974645,
+        1152096818, 1300588300, 1008999999, 1006777779, 1255974645,
         1263812140, 1054288357, 1300506714, 1302900489, 1302696214,
         1126374902, 1302762000
     }
@@ -114,13 +95,12 @@ local hostname = getHostname()
 if hostname then
     if not isHostnameVip(hostname) then
         messageDialog("LỖI : HOSTNAME KHÔNG ĐƯỢC PHÉP", mtError)
-	deleteFile(filePath)
-	autodelete()
+        deleteFile(cheatTablePath)
+        autodelete()
         closeCE()
         return
     end
 else
-    -- If hostname retrieval failed
     messageDialog("LỖI : KHÔNG PHÁT HIỆN ĐƯỢC TÊN MÁY TÍNH!", mtError)
     closeCE()
     return
@@ -136,7 +116,7 @@ end
 
 if not isUidVip(miniuid) then
     messageDialog("LỖI : KHÔNG ĐÚNG ID NGƯỜI CHƠI!", mtError)
-    deleteFile(filePath)
+    deleteFile(cheatTablePath)
     autodelete()
     closeCE()
 end
