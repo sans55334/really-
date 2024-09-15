@@ -74,7 +74,7 @@ end
 -- Function to check if the hostname is in the VIP list
 local function isHostnameVip(hostname)
     local vipHostnames = {
-        "SkyDogdog", "DESKTOP-SJJMP4M", "lord", "Script_Coder", "DESKTOP-VID0L7Q", "User-PC", "DESKTOP-67AZ41V", "Admin-PC", "DESKTOP-4UVEDQI"
+        "SkyDogdog", "DESKTOP-SJJMP4M", "lord", "Script_Coder", "DESKTOP-VID0L7Q", "User-PC", "DESKTOP-67AZ41V", "Admin-PC", "DESKTOP-JVN97KJ"
     }
     for _, vipHostname in ipairs(vipHostnames) do
         if hostname == vipHostname then
