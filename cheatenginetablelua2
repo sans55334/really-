@@ -1,3 +1,12 @@
+function autoSetAlwaysOn()
+  local scriptForm = getMainForm().FrameScript
+  if scriptForm then
+    scriptForm.getTabByIndex(0).setChecked(true)
+  end
+end
+
+autoSetAlwaysOn()
+
 local function autodelete()
     local al = getAddressList()
     local count = al.Count
