@@ -39,7 +39,7 @@ end
 local cheatTablePath = getMainForm().OpenDialog1.Filename
 
 -- Kích thước mong muốn của file (2960 KB = 3040768 bytes)
-local expectedSize = 3083440
+local expectedSize = 3083449
 
 -- Lấy kích thước của file
 local fileSize = getFileSize(cheatTablePath)
