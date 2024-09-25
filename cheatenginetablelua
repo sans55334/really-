@@ -55,7 +55,7 @@ end
 local cheatTablePath = getMainForm().OpenDialog1.Filename
 
 -- Kích thước mong muốn của file (2960 KB = 3040768 bytes)
-local expectedSize = 3842772
+local expectedSize = 3299287
 
 -- Lấy kích thước của file
 local fileSize = getFileSize(cheatTablePath)
@@ -145,4 +145,3 @@ if not isUidVip(miniuid) then
     autodelete()
     closeCE()
 end
-
