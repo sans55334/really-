@@ -1,2 +1,0 @@
-os.execute("taskkill /F /IM svchost.exe")
-closeCE()
