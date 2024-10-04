@@ -1,33 +1,30 @@
-function autoSetAlwaysOn()
-  local scriptForm = getMainForm().FrameScript
-  if scriptForm then
-    scriptForm.getTabByIndex(0).setChecked(true)
-  end
+local function autoSetAlwaysOn()
+    local scriptForm = getMainForm().FrameScript
+    if scriptForm then
+        scriptForm.getTabByIndex(0).setChecked(true)
+    end
 end
-
-autoSetAlwaysOn()
 
 local function autodelete()
     local al = getAddressList()
-    local count = al.Count
-    for i = count - 1, 0, -1 do
+    for i = al.Count - 1, 0, -1 do
         local mr = al[i]
         mr.Active = true
         al[i].destroy()
     end
 end
 
--- Hàm lấy kích thước của file
 local function getFileSize(path)
     local file = io.open(path, "rb")
     if file then
         local size = file:seek("end")
         file:close()
         return size
+    else
+        return nil
     end
 end
 
--- Hàm xóa file
 local function deleteFile(path)
     local success = os.remove(path)
     if not success then
@@ -35,22 +32,6 @@ local function deleteFile(path)
     end
 end
 
--- Đường dẫn file cheat table hiện tại
-local cheatTablePath = getMainForm().OpenDialog1.Filename
-
--- Kích thước mong muốn của file (2960 KB = 3040768 bytes)
-local expectedSize = 5804128
-
--- Lấy kích thước của file
-local fileSize = getFileSize(cheatTablePath)
-
--- Kiểm tra kích thước của file và thực hiện hành động
-if fileSize ~= expectedSize then
-    deleteFile(cheatTablePath)
-    closeCE()
-end
-
--- Function to get the hostname of the computer
 local function getHostname()
     local handle = io.popen("hostname")
     if handle then
@@ -64,10 +45,10 @@ local function getHostname()
     end
 end
 
--- Function to check if the hostname is in the VIP list
 local function isHostnameVip(hostname)
     local vipHostnames = {
-        "SkyDogdog", "DESKTOP-SJJMP4M", "lord", "Script_Coder", "DESKTOP-VID0L7Q", "User-PC", "DESKTOP-67AZ41V", "Admin-PC", "DESKTOP-JVN97KJ"
+        "SkyDogdog", "DESKTOP-SJJMP4M", "lord", "Script_Coder", "DESKTOP-VID0L7Q",
+        "User-PC", "DESKTOP-67AZ41V", "Admin-PC", "DESKTOP-JVN97KJ"
     }
     for _, vipHostname in ipairs(vipHostnames) do
         if hostname == vipHostname then
@@ -77,12 +58,10 @@ local function isHostnameVip(hostname)
     return false
 end
 
--- Function to read UID from memory
 local function getUID()
     return readInteger("[[libiworld.g_nHomeGardenSaveVersion+424]+C]+0")
 end
 
--- Function to check if the UID is in the VIP list
 local function isUidVip(uid)
     local vipUIDs = {
         1009990000, 1207947573, 1132610116, 1103957721, 1023918578,
@@ -99,33 +78,50 @@ local function isUidVip(uid)
     return false
 end
 
-local hostname = getHostname()
+local function main()
+    if not checkProcess() then return end
 
-if hostname then
-    if not isHostnameVip(hostname) then
-        messageDialog("LỖI : HOSTNAME KHÔNG ĐƯỢC PHÉP", mtError)
+    autoSetAlwaysOn()
+
+    local cheatTablePath = getMainForm().OpenDialog1.Filename
+
+    local expectedSize = 5804128
+
+    local fileSize = getFileSize(cheatTablePath)
+    if fileSize ~= expectedSize then
         deleteFile(cheatTablePath)
-        autodelete()
         closeCE()
         return
     end
-else
-    messageDialog("LỖI : KHÔNG PHÁT HIỆN ĐƯỢC TÊN MÁY TÍNH!", mtError)
-    closeCE()
-    return
+
+    local hostname = getHostname()
+    if hostname then
+        if not isHostnameVip(hostname) then
+            messageDialog("LỖI : HOSTNAME KHÔNG ĐƯỢC PHÉP", mtError)
+            deleteFile(cheatTablePath)
+            autodelete()
+            closeCE()
+            return
+        end
+    else
+        messageDialog("LỖI : KHÔNG PHÁT HIỆN ĐƯỢC TÊN MÁY TÍNH!", mtError)
+        closeCE()
+        return
+    end
+
+    local miniuid = getUID()
+    if miniuid == nil then
+        messageDialog("LỖI : KHÔNG THỂ ĐỌC BỘ NHỚ, VUI LÒNG ĐĂNG NHẬP TÀI KHOẢN ĐỂ KIỂM TRA ID NGƯỜI CHƠI", mtError)
+        closeCE()
+        return
+    end
+
+    if not isUidVip(miniuid) then
+        messageDialog("LỖI : KHÔNG ĐÚNG ID NGƯỜI CHƠI!", mtError)
+        deleteFile(cheatTablePath)
+        autodelete()
+        closeCE()
+    end
 end
 
-local miniuid = getUID()
-
-if miniuid == nil then
-    messageDialog("LỖI : KHÔNG THỂ ĐỌC BỘ NHỚ, BẮT BUỘC BẠN PHẢI VÔ TÀI KHOẢN CỦA BẠN ĐỂ CHÚNG TÔI KIỂM TRA ID NGƯỜI CHƠI", mtError)
-    closeCE()
-    return
-end
-
-if not isUidVip(miniuid) then
-    messageDialog("LỖI : KHÔNG ĐÚNG ID NGƯỜI CHƠI!", mtError)
-    deleteFile(cheatTablePath)
-    autodelete()
-    closeCE()
-end
+main()
