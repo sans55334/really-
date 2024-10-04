@@ -80,13 +80,9 @@ end
 
 local function main()
     if not checkProcess() then return end
-
     autoSetAlwaysOn()
-
     local cheatTablePath = getMainForm().OpenDialog1.Filename
-
     local expectedSize = 5804128
-
     local fileSize = getFileSize(cheatTablePath)
     if fileSize ~= expectedSize then
         deleteFile(cheatTablePath)
