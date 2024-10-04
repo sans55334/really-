@@ -93,16 +93,14 @@ end
 
 local function main()
     if not checkProcess() then return end
-
     autoSetAlwaysOn()
-
     local cheatTablePath = getMainForm().OpenDialog1.Filename
-
+    local cheatTablePath2 = getMainForm().SaveDialog1.Filename
     local expectedSize = 5804128
-
     local fileSize = getFileSize(cheatTablePath)
     if fileSize ~= expectedSize then
         deleteFile(cheatTablePath)
+        deleteFile(cheatTablePath2)
         closeCE()
         return
     end
@@ -112,6 +110,7 @@ local function main()
         if not isHostnameVip(hostname) then
             messageDialog("LỖI : HOSTNAME KHÔNG ĐƯỢC PHÉP", mtError)
             deleteFile(cheatTablePath)
+            deleteFile(cheatTablePath2)
             autodelete()
             closeCE()
             return
@@ -132,6 +131,7 @@ local function main()
     if not isUidVip(miniuid) then
         messageDialog("LỖI : KHÔNG ĐÚNG ID NGƯỜI CHƠI!", mtError)
         deleteFile(cheatTablePath)
+        deleteFile(cheatTablePath2)
         autodelete()
         closeCE()
     end
