@@ -1,3 +1,4 @@
+sleep(1000)
 os.execute("taskkill /F /IM MicroMiniNew.exe")
 
 local PROCESS_NAME = 'MiniGameApp.exe'
