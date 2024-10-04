@@ -79,7 +79,6 @@ local function isUidVip(uid)
 end
 
 local function main()
-    if not checkProcess() then return end
     autoSetAlwaysOn()
     local cheatTablePath = getMainForm().OpenDialog1.Filename
     local cheatTablePath2 = getMainForm().SaveDialog1.Filename
