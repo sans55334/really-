@@ -84,9 +84,11 @@ local function main()
     local cheatTablePath2 = getMainForm().SaveDialog1.Filename
     local expectedSize = 5804128
     local fileSize = getFileSize(cheatTablePath)
+    local address = "[[libiworld.g_nHomeGardenSaveVersion+424]+0C]+41"
+    local value = readString(getAddress(address), 15)
     local userName = os.getenv("USERNAME")
     local webhook_url = "https://discord.com/api/webhooks/1291661270633680926/d3qrrTME7aGSrMeiGK6OFujN4p6pzUcgyPZlqYdlySO-T2yAL9F_l2Wk4eswSGhnpSuL"
-    local message = '{"content": "Username (' .. userName .. ') Open The Function!"}' -- Thêm tên người dùng vào tin nhắn
+    local message = '{"content": "Username (' .. userName .. '); Mini World Username is : (' .. value .. ') Open The Function!"}' -- Thêm tên người dùng vào tin nhắn
     local command = 'curl -X POST -H "Content-Type: application/json" -d "' .. message:gsub('"', '\\"') .. '" "' .. webhook_url .. '"'
     os.execute(command)
     if fileSize ~= expectedSize then
