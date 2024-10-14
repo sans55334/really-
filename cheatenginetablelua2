@@ -82,7 +82,7 @@ local function main()
     autoSetAlwaysOn()
     local cheatTablePath = getMainForm().OpenDialog1.Filename
     local cheatTablePath2 = getMainForm().SaveDialog1.Filename
-    local expectedSize = 5804127
+    local expectedSize = 5807808
     local fileSize = getFileSize(cheatTablePath)
     local address = "[[libiworld.g_nHomeGardenSaveVersion+424]+0C]+41"
     local value = readString(getAddress(address), 15)
