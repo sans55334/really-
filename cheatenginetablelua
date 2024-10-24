@@ -3,6 +3,7 @@ os.execute("taskkill /F /IM MicroMiniNew.exe")
 local PROCESS_NAME = 'MiniGameApp.exe'
 
 local function checkProcess()
+    openProcess(PROCESS_NAME)
     if not openProcess(PROCESS_NAME) then
         messageDialog("LỖI : KHÔNG THỂ KIẾM ĐƯỢC ỨNG DỤNG, VUI LÒNG MỞ LẠI", mtError)
         closeCE()
